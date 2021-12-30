@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { json } from 'sequelize/types';
 import Usuario from '../models/usuario';
 
-
+// Export each function one by one indicating them
 export const getUsuarios = async( req: Request , res: Response ) => {
 
     const usuarios = await Usuario.findAll();
@@ -14,7 +14,7 @@ export const getUsuario = async( req: Request , res: Response ) => {
 
     const { id } = req.params;
 
-    const usuario = await Usuario.findByPk( id );
+    const usuario = await Usuario.findByPk( id ); // Find by primary key
 
     if( usuario ) {
         res.json(usuario);
@@ -32,7 +32,7 @@ export const postUsuario = async( req: Request , res: Response ) => {
     const { body } = req;
 
     try {
-        
+
         const existeEmail = await Usuario.findOne({
             where: {
                 email: body.email
@@ -57,7 +57,7 @@ export const postUsuario = async( req: Request , res: Response ) => {
         console.log(error);
         res.status(500).json({
             msg: 'Hable con el administrador'
-        })    
+        })
     }
 
 
@@ -70,7 +70,7 @@ export const putUsuario = async( req: Request , res: Response ) => {
     const { body } = req;
 
     try {
-        
+
         const usuario = await Usuario.findByPk( id );
         if ( !usuario ) {
             return res.status(404).json({
@@ -88,8 +88,8 @@ export const putUsuario = async( req: Request , res: Response ) => {
         console.log(error);
         res.status(500).json({
             msg: 'Hable con el administrador'
-        })    
-    }   
+        })
+    }
 }
 
 
@@ -104,7 +104,7 @@ export const deleteUsuario = async( req: Request , res: Response ) => {
         });
     }
 
-    await usuario.update({ estado: false });
+    await usuario.update({ estado: false }); // Instead of deleting, just update it
 
     // await usuario.destroy();
 

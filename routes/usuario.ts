@@ -13,4 +13,5 @@ router.delete('/:id', deleteUsuario );
 
 
 
-export default router;
+export default router; // If there are several objects to export --> Default is that one to be exported
+// export const checkExports = 123;
